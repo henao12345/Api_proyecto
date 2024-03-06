@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Conexión a MongoDB
-mongoose.connect('mongodb://localhost:27017/gymDB', {
+mongoose.connect('mongodb+srv://cesarhenaogarcia:Augusto12345@cluster0.3d2eeds.mongodb.net/', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
