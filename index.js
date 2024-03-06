@@ -61,6 +61,28 @@ app.post('/users', async (req, res) => {
         res.status(500).json({ error: 'Error en el servidor' });
     }
 });
+// Ruta para actualizar un usuario por ID
+app.put('/users/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const newData = req.body; // Los nuevos datos del usuario a actualizar
+
+        // Actualizar el usuario en la base de datos
+        const updatedUser = await User.findByIdAndUpdate(userId, newData, { new: true });
+
+        if (!updatedUser) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+
+        res.json({ message: 'Usuario actualizado correctamente', user: updatedUser });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+});
+
+
+
 
 // Ruta para eliminar un usuario por ID
 app.delete('/users/:id', async (req, res) => {
@@ -98,6 +120,27 @@ app.post('/trainers', async (req, res) => {
     }
 });
 
+// Ruta para actualizar un entrenador por ID
+app.put('/trainers/:id', async (req, res) => {
+    try {
+        const trainerId = req.params.id;
+        const newData = req.body; // Los nuevos datos del entrenador a actualizar
+
+        // Actualizar el entrenador en la base de datos
+        const updatedTrainer = await Trainer.findByIdAndUpdate(trainerId, newData, { new: true });
+
+        if (!updatedTrainer) {
+            return res.status(404).json({ error: 'Entrenador no encontrado' });
+        }
+
+        res.json({ message: 'Entrenador actualizado correctamente', trainer: updatedTrainer });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+});
+
+
 // Ruta para eliminar un entrenador por ID
 app.delete('/trainers/:id', async (req, res) => {
     try {
@@ -122,6 +165,26 @@ app.get('/admins', async (req, res) => {
         res.status(500).json({ error: 'Error en el servidor' });
     }
 });
+// Ruta para actualizar un administrador por ID
+app.put('/admins/:id', async (req, res) => {
+    try {
+        const adminId = req.params.id;
+        const newData = req.body; // Los nuevos datos del administrador a actualizar
+
+        // Actualizar el administrador en la base de datos
+        const updatedAdmin = await Admin.findByIdAndUpdate(adminId, newData, { new: true });
+
+        if (!updatedAdmin) {
+            return res.status(404).json({ error: 'Administrador no encontrado' });
+        }
+
+        res.json({ message: 'Administrador actualizado correctamente', admin: updatedAdmin });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+});
+
 
 // Ruta para crear un nuevo administrador
 app.post('/admins', async (req, res) => {
